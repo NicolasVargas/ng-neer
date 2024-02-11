@@ -1,0 +1,8 @@
+{
+  "name": "todos-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/todos/api/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": []
+}

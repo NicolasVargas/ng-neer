@@ -1,0 +1,56 @@
+{
+  "name": "todos-server",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/todos/server/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/todos/server",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/todos/server/src/main.ts",
+        "tsConfig": "apps/todos/server/tsconfig.app.json",
+        "assets": ["apps/todos/server/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "todos-server:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "todos-server:build:development"
+        },
+        "production": {
+          "buildTarget": "todos-server:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}
